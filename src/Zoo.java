@@ -44,37 +44,46 @@ public class Zoo implements ObserverActions{
             }
         }
         System.out.println("The zoo contains total of " + animalsList.size() + " animals:");
-        System.out.println("-Zebra: " + zebraCounter);
-        System.out.println("-Unicorn: " + unicornCounter);
-        System.out.println("-Monkey: " + monkeyCounter);
+        System.out.println("- Zebra: " + zebraCounter);
+        System.out.println("- Unicorn: " + unicornCounter);
+        System.out.println("- Monkey: " + monkeyCounter);
         System.out.println("Happiness level: " + happinessLevel);
-        if (happinessLevel < 3){
+        if (happinessLevel > 3){
             System.out.println("The animals are very happy, keep working hard...");
         }
         else {
             System.out.println("The animals are not happy, you should watch them...");
         }
         System.out.println("Hunger level: " + hungerLevel);
-        if(hungerLevel < 3){
+        if(hungerLevel > 3){
             System.out.println("The animals are hungry, you should feed them...");
         }
+        monkeyCounter = 0;
+        zebraCounter = 0;
+        unicornCounter = 0;
     }
 
     public void feedAnimals(){
         for(int i = 0; i < animalsList.size(); i++){
             animalsList.get(i).eat();
         }
-        hungerLevel--;
+        if (hungerLevel > 0){
+            hungerLevel--;
+        }
         this.currentMessage = "The animals are being fed";
         notifyObservers();
-
     }
 
     public void watchAnimals(){
         for(int i = 0; i < animalsList.size(); i++){
             animalsList.get(i).participateInShow();
         }
-        happinessLevel++;
+        if (happinessLevel < 5){
+            happinessLevel++;
+        }
+        if (hungerLevel < 5){
+            hungerLevel++;
+        }
         this.currentMessage = "The animals are being watched";
         notifyObservers();
     }
