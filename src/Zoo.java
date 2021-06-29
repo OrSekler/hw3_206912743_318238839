@@ -49,7 +49,8 @@ public class Zoo implements ObserverActions{
             }
         }
         // prints the generic information about the animals in the zoo.
-        System.out.println("The zoo contains total of " + animalsList.size() + " animals:");
+        System.out.println("The zoo contains total of " + animalsList.size()
+                + " animals:");
         System.out.println("- Zebra: " + zebraCounter);
         System.out.println("- Unicorn: " + unicornCounter);
         System.out.println("- Monkey: " + monkeyCounter);
