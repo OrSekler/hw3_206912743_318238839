@@ -1,14 +1,16 @@
 import java.util.ArrayList;
 
-public class Zoo {
+public class Zoo implements ObserverActions{
     int happinessLevel = 2;
     int hungerLevel = 3;
     int monkeyCounter = 0;
     int unicornCounter = 0;
     int zebraCounter = 0;
+    String currentMessage;
 
     private static Zoo instance = null;
-    public ArrayList<Animal> animalsList = new ArrayList<Animal>();
+    public ArrayList<Animal> animalsList = new ArrayList<Animal>();/////////////////////// move to constructor ?
+    public ArrayList<ZooObserver> zooObservers = new ArrayList<ZooObserver>();
 
     private Zoo(){}
 
@@ -25,6 +27,8 @@ public class Zoo {
 
     public void addAnimal(Animal animal){
         animalsList.add(animal);
+        this.currentMessage = animal.toString() + " has been added to the zoo!";
+        notifyObservers();
     }
 
     public void showAnimalsInfo(){
@@ -61,6 +65,8 @@ public class Zoo {
             animalsList.get(i).eat();
         }
         hungerLevel--;
+        this.currentMessage = "The animals are being fed";
+        notifyObservers();
 
     }
 
@@ -69,10 +75,22 @@ public class Zoo {
             animalsList.get(i).participateInShow();
         }
         happinessLevel++;
+        this.currentMessage = "The animals are being watched";
+        notifyObservers();
+    }
 
+    public void addObserver(ZooObserver newObserver){
+        this.zooObservers.add(newObserver);
+    }
+
+    public void removeObserver(ZooObserver observerToRemove){
+        this.zooObservers.remove(observerToRemove);
+    }
+
+    public void notifyObservers(){
+        System.out.println("Notifying observers:");
+        for (int i = 0; i < zooObservers.size(); i++){
+            zooObservers.get(i).newMessage(currentMessage);
+        }
     }
 }
-
-/*
-
- */

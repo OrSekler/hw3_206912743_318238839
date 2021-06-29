@@ -6,4 +6,8 @@ public class Monkey implements Animal{
     public void participateInShow(){
         System.out.println("The monkey is hanging on trees...");
     }
+
+    public String toString(){
+        return "Monkey";
+    }
 }

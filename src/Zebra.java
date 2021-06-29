@@ -7,4 +7,8 @@ public class Zebra implements Animal{
 
         System.out.println("The zebra is running...");
     }
+
+    public String toString(){
+        return "Zebra";
+    }
 }
